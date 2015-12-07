@@ -17,6 +17,8 @@ libraryDependencies += "org.julienrf" %% "enum-values" % "1.0"
 libraryDependencies += "org.julienrf" %% "enum-labels" % "1.0"
 ~~~
 
+The artifacts are built for Scala 2.11 and Scala.js 0.6.
+
 ## Usage
 
 Just define your enumeration as a sealed trait extended by case objects.
