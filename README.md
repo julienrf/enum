@@ -1,6 +1,6 @@
 # Enum
 
-Yet another enumeration toolbox for Scala.
+Yet another enumeration toolbox for Scala, powered by [shapeless](https://github.com/milessabin/shapeless).
 
 Two artifacts are available: `enum-values` and `enum-labels`. As their names suggest, the former deals with the values
 of an enumeration and the latter deals with the names of an enumeration.
