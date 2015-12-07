@@ -1,6 +1,6 @@
 name := "enums"
 
-organization := "org.julienrf"
+organization in ThisBuild := "org.julienrf"
 
 scalaVersion in ThisBuild := "2.11.7"
 
