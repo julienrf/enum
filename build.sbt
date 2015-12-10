@@ -34,7 +34,6 @@ val values =
     )
 
 val valuesJS = values.js
-
 val valuesJVM = values.jvm
 
 val labels =
@@ -46,12 +45,22 @@ val labels =
     )
 
 val labelsJS = labels.js
-
 val labelsJVM = labels.jvm
 
 val enum =
+  crossProject.crossType(CrossType.Pure)
+    .in(file("enum"))
+    .settings(
+      name := "enum",
+      libraryDependencies ++= shapelessAndTestDeps.value
+    ).dependsOn(values)
+
+val enumJS = enum.js
+val enumJVM = enum.jvm
+
+val enums =
   project.in(file("."))
     .settings(
       publishArtifact := false
     )
-    .aggregate(valuesJS, valuesJVM, labelsJS, labelsJVM)
+    .aggregate(valuesJS, valuesJVM, labelsJS, labelsJVM, enumJS, enumJVM)
