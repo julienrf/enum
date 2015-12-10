@@ -2,7 +2,7 @@
 
 Yet another enumeration toolbox for Scala, powered by [shapeless](https://github.com/milessabin/shapeless).
 
-Two artifacts are available:
+Several artifacts are available:
  - `enum-values`: finds the set of values of an enumeration ;
  - `enum-labels`: finds the set of value names of an enumeration ;
  - `enum`: finds the values and labels of an enumeration and a mapping to go from a value to its label and _vice versa_.
