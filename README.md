@@ -12,15 +12,15 @@ Several artifacts are available:
 Add the following dependencies to your build, according to the artifacts you are interested in:
 
 ~~~ scala
-libraryDependencies += "org.julienrf" %% "enum-values" % "1.1"
+libraryDependencies += "org.julienrf" %% "enum-values" % "2.0"
 ~~~
 
 ~~~ scala
-libraryDependencies += "org.julienrf" %% "enum-labels" % "1.1"
+libraryDependencies += "org.julienrf" %% "enum-labels" % "2.0"
 ~~~
 
 ~~~ scala
-libraryDependencies += "org.julienrf" %% "enum" % "1.1"
+libraryDependencies += "org.julienrf" %% "enum" % "2.0"
 ~~~
 
 The artifacts are built for Scala 2.11 and Scala.js 0.6.
@@ -80,6 +80,8 @@ enum.decodeOpt("Baz") == Some(Foo.Baz)
 
 ## Changelog
 
+- 2.0
+    - Added support for implicit definitions in enumerations companion objects
 - 1.1
     - Added `Enum[A]`
 - 1.0

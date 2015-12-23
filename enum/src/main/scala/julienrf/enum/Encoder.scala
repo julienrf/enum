@@ -13,17 +13,19 @@ trait Encoder[A] {
 
 object Encoder {
 
+  trait Derived[A] extends Encoder[A]
+
   /**
     * @return A generated encoder for `A` values
     */
-  @inline def apply[A](implicit encoder: Encoder[A]): Encoder[A] = encoder
+  @inline def apply[A](implicit derived: Derived[A]): Encoder[A] = derived
 
   /**
     * @param gen Isomorphism between `A` and `Repr`. Compared to `Generic`, `LabelledGeneric` yields `Repr` types
     *            also containing names: `FieldType['Foo.type, Foo.type] :+: CNil`.
     */
-  implicit def derived[A, Repr <: Coproduct](implicit gen: LabelledGeneric.Aux[A, Repr], e: EncoderAux[A, Repr]): Encoder[A] =
-    new Encoder[A]{ def encode(a: A) = e.encode(a) }
+  implicit def generic[A, Repr <: Coproduct](implicit gen: LabelledGeneric.Aux[A, Repr], e: EncoderAux[A, Repr]): Derived[A] =
+    new Derived[A]{ def encode(a: A) = e.encode(a) }
 
   case class EncoderAux[A, Repr](encode: Map[A, String])
 

@@ -43,10 +43,12 @@ case class DecodingFailure[A](validValues: Set[String])
 
 object Enum {
 
-  @inline def apply[A](implicit codec: Enum[A]): Enum[A] = codec
+  trait Derived[A] extends Enum[A]
 
-  implicit def fromValuesAndEncoder[A](implicit _values: Values[A], encoder: Encoder[A]): Enum[A] =
-    new Enum[A] {
+  @inline def apply[A](implicit derived: Derived[A]): Enum[A] = derived
+
+  implicit def fromValuesAndEncoder[A](implicit _values: Values[A], encoder: Encoder[A]): Derived[A] =
+    new Derived[A] {
 
       val values = _values.values
 

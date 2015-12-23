@@ -6,7 +6,9 @@ import scala.annotation.implicitNotFound
 
 /** A typeclass giving the values of an enumeration */
 @implicitNotFound("Unable to find values of ${A}. Make sure it is a sealed trait and is only extended by case objects.")
-class Values[A](val values: Set[A])
+trait Values[A] {
+  val values: Set[A]
+}
 
 /**
   * The companion object contains the machinery to automatically derive the values of a sealed trait
@@ -23,6 +25,8 @@ class Values[A](val values: Set[A])
   */
 object Values {
 
+  trait Derived[A] extends Values[A]
+
   /**
     * {{{
     *   sealed trait Foo
@@ -35,7 +39,7 @@ object Values {
     *
     * @return All the possible values of `A`
     */
-  @inline def apply[A](implicit values: Values[A]): Values[A] = values
+  @inline def apply[A](implicit derived: Derived[A]): Values[A] = derived
 
   /**
     * Derives a `Values[A]` instance given a representation `Repr` of type `A` in terms of `Coproduct`, and a given
@@ -49,8 +53,8 @@ object Values {
     * @param gen Isomorphism between `A` and `Repr`. Shapeless is able to provide such an implicit value for any
     *            sealed type
     */
-  implicit def derived[A, Repr <: Coproduct](implicit gen: Generic.Aux[A, Repr], v: ValuesAux[A, Repr]): Values[A] =
-    new Values[A](v.values.to[Set])
+  implicit def generic[A, Repr <: Coproduct](implicit gen: Generic.Aux[A, Repr], v: ValuesAux[A, Repr]): Derived[A] =
+    new Derived[A] { val values = v.values.to[Set] }
 
   /**
     * An intermediate data structure that carries both the type `A` and its representation `Repr`.
