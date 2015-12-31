@@ -41,27 +41,31 @@ trait Enum[A] {
 
 case class DecodingFailure[A](validValues: Set[String])
 
-object Enum {
+object Enum extends Enum1
+
+trait Enum1 {
 
   trait Derived[A] extends Enum[A]
 
   @inline def apply[A](implicit derived: Derived[A]): Enum[A] = derived
 
-  implicit def fromValuesAndEncoder[A](implicit _values: Values[A], encoder: Encoder[A]): Derived[A] =
-    new Derived[A] {
+  object Derived {
+    implicit def fromValuesAndEncoder[A](implicit _values: Values.Derived[A], encoder: Encoder.Derived[A]): Derived[A] =
+      new Derived[A] {
 
-      val values = _values.values
+        val values = _values.values
 
-      val labels = values.map(encoder.encode)
+        val labels = values.map(encoder.encode)
 
-      val decoder: Map[String, A] =
-        values.map(value => (encoder.encode(value), value)).toMap
+        val decoder: Map[String, A] =
+          values.map(value => (encoder.encode(value), value)).toMap
 
-      def decode(s: String) =
-        decoder.get(s).map(Right(_)).getOrElse(Left(DecodingFailure[A](labels)))
+        def decode(s: String) =
+          decoder.get(s).map(Right(_)).getOrElse(Left(DecodingFailure[A](labels)))
 
-      def encode(a: A) =
-        encoder.encode(a)
-    }
+        def encode(a: A) =
+          encoder.encode(a)
+      }
+  }
 
 }

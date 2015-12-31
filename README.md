@@ -2,26 +2,12 @@
 
 Yet another enumeration toolbox for Scala, powered by [shapeless](https://github.com/milessabin/shapeless).
 
-Several artifacts are available:
- - `enum-values`: finds the set of values of an enumeration ;
- - `enum-labels`: finds the set of value names of an enumeration ;
- - `enum`: finds the values and labels of an enumeration and a mapping to go from a value to its label and _vice versa_.
-
 ## Installation
 
-Add the following dependencies to your build, according to the artifacts you are interested in:
-
-~~~ scala
-libraryDependencies += "org.julienrf" %% "enum-values" % "2.0"
-~~~
-
-~~~ scala
-libraryDependencies += "org.julienrf" %% "enum-labels" % "2.0"
-~~~
-
-~~~ scala
-libraryDependencies += "org.julienrf" %% "enum" % "2.0"
-~~~
+Several artifacts are available:
+ - `enum-values` [![Maven Central](https://img.shields.io/maven-central/v/org.julienrf/enum-values_2.11.svg)](https://maven-badges.herokuapp.com/maven-central/org.julienrf/enum-values_2.11): finds the set of values of an enumeration ;
+ - `enum-labels` [![Maven Central](https://img.shields.io/maven-central/v/org.julienrf/enum-labels_2.11.svg)](https://maven-badges.herokuapp.com/maven-central/org.julienrf/enum-labels_2.11): finds the set of value names of an enumeration ;
+ - `enum` [![Maven Central](https://img.shields.io/maven-central/v/org.julienrf/enum_2.11.svg)](https://maven-badges.herokuapp.com/maven-central/org.julienrf/enum_2.11): finds the values and labels of an enumeration and a mapping to go from a value to its label and _vice versa_.
 
 The artifacts are built for Scala 2.11 and Scala.js 0.6.
 
@@ -80,6 +66,8 @@ enum.decodeOpt("Baz") == Some(Foo.Baz)
 
 ## Changelog
 
+- 2.1
+    - Lessen derivation implicit priority
 - 2.0
     - Added support for implicit definitions in enumerations companion objects
 - 1.1
