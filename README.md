@@ -66,6 +66,8 @@ enum.decodeOpt("Baz") == Some(Foo.Baz)
 
 ## Changelog
 
+- 2.2
+    - Update shapeless to 2.3.0 and Scala.js to 0.6.7
 - 2.1
     - Lessen derivation implicit priority
 - 2.0
