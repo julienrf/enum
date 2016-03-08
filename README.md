@@ -52,7 +52,7 @@ fooLabels.labels == Set("Bar", "Baz")
 ### `enum`
 
 ~~~ scala
-import julienrf.enum.Enum
+import julienrf.enum.{Enum, DecodingFailure}
 
 val enum: Enum[Foo] = Enum[Foo]
 
