@@ -1,4 +1,4 @@
-package julienrf.enum
+package enum
 
 import shapeless.labelled._
 import shapeless.{:+:, Witness, CNil, LabelledGeneric, Coproduct}

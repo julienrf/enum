@@ -30,7 +30,7 @@ object Foo {
 Use `Values[A]` to automatically gather all the `A` enumeration values as a `Set[A]`:
 
 ~~~ scala
-import julienrf.enum.Values
+import enum.Values
 
 val fooValues: Values[Foo] = Values[Foo]
 
@@ -42,7 +42,7 @@ fooValues.values == Set(Foo.Bar, Foo.Baz)
 Use `Labels[A]` to automatically gather all the `A` enumeration labels as a `Set[String]`:
 
 ~~~ scala
-import julienrf.enum.Labels
+import enum.Labels
 
 val fooLabels: Labels[Foo] = Labels[Foo]
 
@@ -52,7 +52,7 @@ fooLabels.labels == Set("Bar", "Baz")
 ### `enum`
 
 ~~~ scala
-import julienrf.enum.{Enum, DecodingFailure}
+import enum.{Enum, DecodingFailure}
 
 val enum: Enum[Foo] = Enum[Foo]
 
@@ -66,6 +66,8 @@ enum.decodeOpt("Baz") == Some(Foo.Baz)
 
 ## Changelog
 
+- 2.4
+    - Remove package `julienrf`
 - 2.2
     - Update shapeless to 2.3.0 and Scala.js to 0.6.7
 - 2.1
