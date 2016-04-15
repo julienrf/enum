@@ -5,11 +5,11 @@ Yet another enumeration toolbox for Scala, powered by [shapeless](https://github
 ## Installation
 
 Several artifacts are available:
- - `enum-values` [![Maven Central](https://img.shields.io/maven-central/v/org.julienrf/enum-values_2.11.svg)](https://maven-badges.herokuapp.com/maven-central/org.julienrf/enum-values_2.11): finds the set of values of an enumeration ;
- - `enum-labels` [![Maven Central](https://img.shields.io/maven-central/v/org.julienrf/enum-labels_2.11.svg)](https://maven-badges.herokuapp.com/maven-central/org.julienrf/enum-labels_2.11): finds the set of value names of an enumeration ;
- - `enum` [![Maven Central](https://img.shields.io/maven-central/v/org.julienrf/enum_2.11.svg)](https://maven-badges.herokuapp.com/maven-central/org.julienrf/enum_2.11): finds the values and labels of an enumeration and a mapping to go from a value to its label and _vice versa_.
+ - [![Maven Central](https://img.shields.io/maven-central/v/org.julienrf/enum-values_2.11.svg)](https://maven-badges.herokuapp.com/maven-central/org.julienrf/enum-values_2.11) `enum-values`: finds the set of values of an enumeration ;
+ - [![Maven Central](https://img.shields.io/maven-central/v/org.julienrf/enum-labels_2.11.svg)](https://maven-badges.herokuapp.com/maven-central/org.julienrf/enum-labels_2.11) `enum-labels`: finds the set of value names of an enumeration ;
+ - [![Maven Central](https://img.shields.io/maven-central/v/org.julienrf/enum_2.11.svg)](https://maven-badges.herokuapp.com/maven-central/org.julienrf/enum_2.11) `enum`: finds the values and labels of an enumeration and a mapping to go from a value to its label and _vice versa_.
 
-The artifacts are built for Scala 2.11 and Scala.js 0.6.
+The artifacts are built for Scala 2.10 and 2.11 and Scala.js 0.6.
 
 ## Usage
 
