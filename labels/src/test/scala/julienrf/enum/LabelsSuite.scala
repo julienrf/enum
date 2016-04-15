@@ -6,7 +6,7 @@ class LabelsSuite extends FunSuite {
   import LabelsSuite.Foo
 
   test("Labels[Foo]") {
-    assert(Foo.enum.labels == Set("Bar", "Baz"))
+    assert(Labels[Foo].labels == Set("Bar", "Baz"))
   }
 
 }
@@ -17,6 +17,6 @@ object LabelsSuite {
     case object Bar extends Foo
     case object Baz extends Foo
 
-    val enum: Labels[Foo] = Labels[Foo]
+    implicit val enum: Labels[Foo] = Labels.derived
   }
 }
