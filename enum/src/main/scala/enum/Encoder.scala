@@ -13,12 +13,14 @@ trait Encoder[A] {
 
 object Encoder {
 
+  @inline def apply[A](implicit encoder: Encoder[A]): Encoder[A] = encoder
+
   trait Derived[A] extends Encoder[A]
 
   /**
     * @return A generated encoder for `A` values
     */
-  @inline def apply[A](implicit derived: Derived[A]): Encoder[A] = derived
+  @inline implicit def derived[A](implicit derived: Derived[A]): Encoder[A] = derived
 
   object Derived {
     /**

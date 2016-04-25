@@ -25,6 +25,8 @@ trait Values[A] {
   */
 object Values {
 
+  @inline def apply[A](implicit values: Values[A]): Values[A] = values
+
   trait Derived[A] extends Values[A]
 
   /**
@@ -33,13 +35,13 @@ object Values {
     *   object Foo {
     *     case object Bar extends Foo
     *     case object Baz extends Foo
-    *     val values = Values[Foo]
     *   }
+    *   Values.derived[Foo].values == Set(Foo.Bar, Foo.Baz)
     * }}}
     *
     * @return All the possible values of `A`
     */
-  @inline def apply[A](implicit derived: Derived[A]): Values[A] = derived
+  @inline implicit def derived[A](implicit derived: Derived[A]): Values[A] = derived
 
   object Derived {
     /**
