@@ -7,7 +7,7 @@ pomExtra in ThisBuild := (
     </license>
     </licenses>
     <scm>
-    <url>git@github.com:julienrf/enums.git</url>
+    <url>git@github.com:julienrf/enum.git</url>
     <connection>scm:git:git@github.com:julienrf/enum.git</connection>
     </scm>
     <developers>
