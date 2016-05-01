@@ -3,8 +3,9 @@ package enum
 import shapeless.labelled.FieldType
 import shapeless.{:+:, Witness, CNil, LabelledGeneric, Coproduct}
 
-/** Gives the names of all the subtypes of `A`. Note that it is not limited to case objects. */
+/** Gives the names of all the subtypes of `A`. Note that it is not limited to case objects: it works with any sum types. */
 trait Labels[A] {
+  /** The names of all subtypes of `A` */
   val labels: Set[String]
 }
 

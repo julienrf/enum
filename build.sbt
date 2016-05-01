@@ -30,12 +30,20 @@ lazy val commonSettings = Seq(
   libraryDependencies ++= macroParadise(scalaVersion.value) ++ shapelessAndTestDeps.value
 ) ++ warnUnusedImport
 
+val publishSettings = Seq(
+  scalacOptions in (Compile, doc) ++= Seq(
+    "-doc-source-url", s"https://github.com/julienrf/enum/tree/v${version.value}{FILE_PATH}.scala",
+    "-sourcepath", baseDirectory.in(LocalRootProject).value.getAbsolutePath
+  )
+)
+
 val values =
   crossProject.crossType(CrossType.Pure)
     .in(file("values"))
-    .settings(commonSettings: _*)
+    .settings(commonSettings ++ publishSettings: _*)
     .settings(
-      name := "enum-values"
+      name := "enum-values",
+      apiURL := Some(url(s"http://julienrf.github.io/enum-values/${version.value}/api/"))
     )
 
 val valuesJS = values.js
@@ -44,9 +52,10 @@ val valuesJVM = values.jvm
 val labels =
   crossProject.crossType(CrossType.Pure)
     .in(file("labels"))
-    .settings(commonSettings: _*)
+    .settings(commonSettings ++ publishSettings: _*)
     .settings(
-      name := "enum-labels"
+      name := "enum-labels",
+      apiURL := Some(url(s"http://julienrf.github.io/enum-labels/${version.value}/api/"))
     )
 
 val labelsJS = labels.js
@@ -55,9 +64,10 @@ val labelsJVM = labels.jvm
 val enum =
   crossProject.crossType(CrossType.Pure)
     .in(file("enum"))
-    .settings(commonSettings: _*)
+    .settings(commonSettings ++ publishSettings: _*)
     .settings(
-      name := "enum"
+      name := "enum",
+      apiURL := Some(url(s"http://julienrf.github.io/enum/${version.value}/api/"))
     ).dependsOn(values)
 
 val enumJS = enum.js
@@ -85,3 +95,11 @@ lazy val warnUnusedImport = Seq(
 def macroParadise(v: String): Seq[ModuleID] =
   if (v.startsWith("2.10")) Seq(compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full))
   else Seq.empty
+
+val publishDoc = taskKey[Unit]("Publish API documentation for all artifacts")
+
+publishDoc := {
+  IO.copyDirectory((doc in (valuesJVM, Compile)).value, Path.userHome / "sites" / "julienrf.github.com" / "enum-values" / version.value / "api")
+  IO.copyDirectory((doc in (labelsJVM, Compile)).value, Path.userHome / "sites" / "julienrf.github.com" / "enum-labels" / version.value / "api")
+  IO.copyDirectory((doc in (enumJVM, Compile)).value, Path.userHome / "sites" / "julienrf.github.com" / "enum" / version.value / "api")
+}

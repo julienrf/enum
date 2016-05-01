@@ -8,6 +8,7 @@ import scala.annotation.implicitNotFound
 /** A typeclass defining how to encode enumeration values as strings */
 @implicitNotFound("Unable to find a way to encode ${A} values as strings. Make sure it is a sealed trait and is only extended by case objects.")
 trait Encoder[A] {
+  /** Encodes a value as a String */
   def encode(a: A): String
 }
 

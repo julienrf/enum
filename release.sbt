@@ -32,6 +32,7 @@ releaseProcess in ThisBuild := Seq[ReleaseStep](
     commitReleaseVersion,
     tagRelease,
     ReleaseStep(action = Command.process("+publishSigned", _)),
+    ReleaseStep(action = Command.process("publishDocumentation", _)),
     setNextVersion,
     commitNextVersion,
     ReleaseStep(action = Command.process("sonatypeReleaseAll", _)),

@@ -42,6 +42,8 @@ enum.decode("invalid") == Left(DecodingFailure[Foo](Set("Bar", "Baz")))
 enum.decodeOpt("Baz") == Some(Foo.Baz)
 ~~~
 
+See the [API documentation](http://julienrf.github.io/enum/3.0/api) for more details.
+
 ### `enum-values`
 
 Use `Values.derived[A]` to automatically gather all the `A` enumeration values as a `Set[A]`:
@@ -54,6 +56,8 @@ val fooValues: Values[Foo] = Values.derived[Foo]
 fooValues.values == Set(Foo.Bar, Foo.Baz)
 ~~~
 
+See the [API documentation](http://julienrf.github.io/enum-values/3.0/api) for more details.
+
 ### `enum-labels`
 
 Use `Labels.derived[A]` to automatically gather all the `A` enumeration labels as a `Set[String]`:
@@ -65,6 +69,8 @@ val fooLabels: Labels[Foo] = Labels.derived[Foo]
 
 fooLabels.labels == Set("Bar", "Baz")
 ~~~
+
+See the [API documentation](http://julienrf.github.io/enum-labels/3.0/api) for more details.
 
 ## Changelog
 
