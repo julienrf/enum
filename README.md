@@ -69,9 +69,9 @@ fooLabels.labels == Set("Bar", "Baz")
 ## Changelog
 
 - 3.0
-    - Breaking change: the companion object’s `apply` method that was used to derive enumerations
+    - **Breaking change**: the companion object’s `apply` method that was used to derive enumerations
       has been renamed to `derived`. The `apply` method still exists but it now returns the
-      implicitly available instance.
+      implicitly available instance (your old code may still compile with the new version but might fail at runtime).
     - Remove package `julienrf`
 - 2.2
     - Update shapeless to 2.3.0 and Scala.js to 0.6.7
