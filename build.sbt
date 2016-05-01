@@ -30,11 +30,34 @@ lazy val commonSettings = Seq(
   libraryDependencies ++= macroParadise(scalaVersion.value) ++ shapelessAndTestDeps.value
 ) ++ warnUnusedImport
 
+import ReleaseTransformations._
+
 val publishSettings = Seq(
   scalacOptions in (Compile, doc) ++= Seq(
     "-doc-source-url", s"https://github.com/julienrf/enum/tree/v${version.value}{FILE_PATH}.scala",
     "-sourcepath", baseDirectory.in(LocalRootProject).value.getAbsolutePath
-  )
+  ),
+  releasePublishArtifactsAction := PgpKeys.publishSigned.value,
+  pomExtra := (
+    <url>http://github.com/julienrf/enum</url>
+      <licenses>
+        <license>
+          <name>MIT License</name>
+          <url>http://opensource.org/licenses/mit-license.php</url>
+        </license>
+      </licenses>
+      <scm>
+        <url>git@github.com:julienrf/enum.git</url>
+        <connection>scm:git:git@github.com:julienrf/enum.git</connection>
+      </scm>
+      <developers>
+        <developer>
+          <id>julienrf</id>
+          <name>Julien Richard-Foy</name>
+          <url>http://julien.richard-foy.fr</url>
+        </developer>
+      </developers>
+    )
 )
 
 val values =
@@ -76,7 +99,23 @@ val enumJVM = enum.jvm
 val enums =
   project.in(file("."))
     .settings(
-      publishArtifact := false
+      publishArtifact := false,
+      releaseCrossBuild := true,
+      releaseProcess := Seq[ReleaseStep](
+        checkSnapshotDependencies,
+        inquireVersions,
+        runClean,
+        runTest,
+        setReleaseVersion,
+        commitReleaseVersion,
+        tagRelease,
+        publishArtifacts,
+        ReleaseStep(action = Command.process("publishDoc", _)),
+        setNextVersion,
+        commitNextVersion,
+        ReleaseStep(action = Command.process("sonatypeReleaseAll", _)),
+        pushChanges
+      )
     )
     .aggregate(valuesJS, valuesJVM, labelsJS, labelsJVM, enumJS, enumJVM)
 
