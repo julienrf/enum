@@ -34,7 +34,7 @@ import ReleaseTransformations._
 
 val publishSettings = Seq(
   scalacOptions in (Compile, doc) ++= Seq(
-    "-doc-source-url", s"https://github.com/julienrf/enum/tree/v${version.value}{FILE_PATH}.scala",
+    "-doc-source-url", s"https://github.com/julienrf/enum/tree/v${version.value}€{FILE_PATH}.scala",
     "-sourcepath", baseDirectory.in(LocalRootProject).value.getAbsolutePath
   ),
   releasePublishArtifactsAction := PgpKeys.publishSigned.value,
