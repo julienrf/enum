@@ -1,4 +1,4 @@
-package julienrf.enum
+package enum
 
 /**
   * {{{
@@ -7,7 +7,7 @@ package julienrf.enum
   *     case object Bar extends Foo
   *     case object Baz extends Foo
   *
-  *     val enum: Enum[Foo] = Enum[Foo]
+  *     val enum: Enum[Foo] = Enum.derived[Foo]
   *   }
   *
   *   assert(Foo.enum.values == Set(Foo.Bar, Foo.Baz))
@@ -41,13 +41,13 @@ trait Enum[A] {
 
 case class DecodingFailure[A](validValues: Set[String])
 
-object Enum extends Enum1
+object Enum {
 
-trait Enum1 {
+  @inline def apply[A](implicit enum: Enum[A]): Enum[A] = enum
 
   trait Derived[A] extends Enum[A]
 
-  @inline def apply[A](implicit derived: Derived[A]): Enum[A] = derived
+  @inline implicit def derived[A](implicit derived: Derived[A]): Enum[A] = derived
 
   object Derived {
     implicit def fromValuesAndEncoder[A](implicit _values: Values.Derived[A], encoder: Encoder.Derived[A]): Derived[A] =

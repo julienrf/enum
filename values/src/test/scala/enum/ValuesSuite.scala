@@ -1,4 +1,4 @@
-package julienrf.enum
+package enum
 
 import org.scalatest.FunSuite
 
@@ -6,7 +6,7 @@ class ValuesSuite extends FunSuite {
   import ValuesSuite.Foo
 
   test("Values[Foo]") {
-    assert(Foo.enum.values == Set(Foo.Bar, Foo.Baz))
+    assert(Values[Foo].values == Set(Foo.Bar, Foo.Baz))
   }
 
 }
@@ -17,6 +17,6 @@ object ValuesSuite {
     case object Bar extends Foo
     case object Baz extends Foo
 
-    val enum: Values[Foo] = Values[Foo]
+    implicit val enum: Values[Foo] = Values.derived
   }
 }

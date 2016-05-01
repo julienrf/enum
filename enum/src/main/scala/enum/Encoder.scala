@@ -1,4 +1,4 @@
-package julienrf.enum
+package enum
 
 import shapeless.labelled._
 import shapeless.{:+:, Witness, CNil, LabelledGeneric, Coproduct}
@@ -8,17 +8,20 @@ import scala.annotation.implicitNotFound
 /** A typeclass defining how to encode enumeration values as strings */
 @implicitNotFound("Unable to find a way to encode ${A} values as strings. Make sure it is a sealed trait and is only extended by case objects.")
 trait Encoder[A] {
+  /** Encodes a value as a String */
   def encode(a: A): String
 }
 
 object Encoder {
+
+  @inline def apply[A](implicit encoder: Encoder[A]): Encoder[A] = encoder
 
   trait Derived[A] extends Encoder[A]
 
   /**
     * @return A generated encoder for `A` values
     */
-  @inline def apply[A](implicit derived: Derived[A]): Encoder[A] = derived
+  @inline implicit def derived[A](implicit derived: Derived[A]): Encoder[A] = derived
 
   object Derived {
     /**
