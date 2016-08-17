@@ -30,7 +30,7 @@ object Foo {
 Use `Enum.derived[A]` to derive an `Enum[A]` value that provides several useful methods:
 
 ~~~ scala
-import enum.{Values, DecodingFailure}
+import enum.Enum
 
 val enum: Enum[Foo] = Enum.derived[Foo]
 
