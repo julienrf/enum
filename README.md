@@ -2,18 +2,17 @@
 
 Yet another enumeration toolbox for Scala, powered by [shapeless](https://github.com/milessabin/shapeless).
 
-## Installation
+## Artifacts
 
-Several artifacts are available:
- - [![Maven Central](https://img.shields.io/maven-central/v/org.julienrf/enum_2.11.svg)](https://maven-badges.herokuapp.com/maven-central/org.julienrf/enum_2.11) `enum`: finds the values and labels of an enumeration and a mapping to go from a value to its label and _vice versa_.
- - [![Maven Central](https://img.shields.io/maven-central/v/org.julienrf/enum-values_2.11.svg)](https://maven-badges.herokuapp.com/maven-central/org.julienrf/enum-values_2.11) `enum-values`: finds the set of values of an enumeration ;
- - [![Maven Central](https://img.shields.io/maven-central/v/org.julienrf/enum-labels_2.11.svg)](https://maven-badges.herokuapp.com/maven-central/org.julienrf/enum-labels_2.11) `enum-labels`: finds the set of value names of an enumeration ;
+ - [![](https://index.scala-lang.org/julienrf/enum/enum/latest.svg)](https://index.scala-lang.org/julienrf/enum/enum) finds the values and labels of an enumeration and a mapping to go from a value to its label and _vice versa_.
+ - [![](https://index.scala-lang.org/julienrf/enum/enum-values/latest.svg)](https://index.scala-lang.org/julienrf/enum/enum-values) finds the set of values of an enumeration ;
+ - [![](https://index.scala-lang.org/julienrf/enum/enum-labels/latest.svg)](https://index.scala-lang.org/julienrf/enum/enum-labels) finds the set of value names of an enumeration ;
 
 The artifacts are built for Scala 2.10 and 2.11 and Scala.js 0.6.
 
 ## Usage
 
-Just define your enumeration as a sealed trait extended by case objects.
+Just define your enumeration as a sealed trait (or a sealed abstract class) extended by case objects.
 
 For instance:
 
@@ -42,7 +41,7 @@ enum.decode("invalid") == Left(DecodingFailure[Foo](Set("Bar", "Baz")))
 enum.decodeOpt("Baz") == Some(Foo.Baz)
 ~~~
 
-See the [API documentation](http://julienrf.github.io/enum/3.0/api) for more details.
+See the [API documentation](https://www.javadoc.io/doc/org.julienrf/enum_2.11/3.0) for more details.
 
 ### `enum-values`
 
@@ -56,7 +55,7 @@ val fooValues: Values[Foo] = Values.derived[Foo]
 fooValues.values == Set(Foo.Bar, Foo.Baz)
 ~~~
 
-See the [API documentation](http://julienrf.github.io/enum-values/3.0/api) for more details.
+See the [API documentation](https://www.javadoc.io/doc/org.julienrf/enum-values_2.11/3.0) for more details.
 
 ### `enum-labels`
 
@@ -70,7 +69,7 @@ val fooLabels: Labels[Foo] = Labels.derived[Foo]
 fooLabels.labels == Set("Bar", "Baz")
 ~~~
 
-See the [API documentation](http://julienrf.github.io/enum-labels/3.0/api) for more details.
+See the [API documentation](https://www.javadoc.io/doc/org.julienrf/enum-labels_2.11/3.0) for more details.
 
 ## Changelog
 
