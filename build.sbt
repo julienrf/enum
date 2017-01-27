@@ -2,9 +2,9 @@ name := "enums"
 
 organization in ThisBuild := "org.julienrf"
 
-scalaVersion in ThisBuild := "2.12.1"
+scalaVersion in ThisBuild := "2.12.0"
 
-crossScalaVersions := Seq("2.10.6", "2.11.9", scalaVersion.value)
+crossScalaVersions := Seq("2.10.6", "2.11.8", scalaVersion.value)
 
 scalacOptions in ThisBuild ++= Seq(
   "-deprecation",
