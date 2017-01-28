@@ -2,16 +2,15 @@ name := "enums"
 
 organization in ThisBuild := "org.julienrf"
 
-scalaVersion in ThisBuild := "2.11.8"
+scalaVersion in ThisBuild := "2.12.0"
 
-crossScalaVersions := Seq("2.10.6", scalaVersion.value)
+crossScalaVersions := Seq("2.10.6", "2.11.8", scalaVersion.value)
 
 scalacOptions in ThisBuild ++= Seq(
   "-deprecation",
   "-encoding", "UTF-8",
   "-feature",
   "-unchecked",
-  "-Yinline-warnings",
   "-Yno-adapted-args",
   "-Ywarn-dead-code",
   "-Ywarn-numeric-widen",
@@ -21,9 +20,9 @@ scalacOptions in ThisBuild ++= Seq(
 )
 
 lazy val shapelessAndTestDeps = Def.setting(Seq(
-  "com.chuusai" %%% "shapeless" % "2.3.0",
-  "org.scalacheck" %%% "scalacheck" % "1.12.5" % Test,
-  "org.scalatest" %%% "scalatest" % "3.0.0-M14" % Test
+  "com.chuusai" %%% "shapeless" % "2.3.2",
+  "org.scalacheck" %%% "scalacheck" % "1.13.4" % Test,
+  "org.scalatest" %%% "scalatest" % "3.0.1" % Test
 ))
 
 lazy val commonSettings = Seq(
