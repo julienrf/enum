@@ -64,8 +64,7 @@ val values =
     .in(file("values"))
     .settings(commonSettings ++ publishSettings: _*)
     .settings(
-      name := "enum-values",
-      apiURL := Some(url(s"http://julienrf.github.io/enum-values/${version.value}/api/"))
+      name := "enum-values"
     )
 
 val valuesJS = values.js
@@ -76,8 +75,7 @@ val labels =
     .in(file("labels"))
     .settings(commonSettings ++ publishSettings: _*)
     .settings(
-      name := "enum-labels",
-      apiURL := Some(url(s"http://julienrf.github.io/enum-labels/${version.value}/api/"))
+      name := "enum-labels"
     )
 
 val labelsJS = labels.js
@@ -88,8 +86,7 @@ val enum =
     .in(file("enum"))
     .settings(commonSettings ++ publishSettings: _*)
     .settings(
-      name := "enum",
-      apiURL := Some(url(s"http://julienrf.github.io/enum/${version.value}/api/"))
+      name := "enum"
     ).dependsOn(values)
 
 val enumJS = enum.js
@@ -109,7 +106,6 @@ val enums =
         commitReleaseVersion,
         tagRelease,
         publishArtifacts,
-        ReleaseStep(action = Command.process("publishDoc", _)),
         setNextVersion,
         commitNextVersion,
         ReleaseStep(action = Command.process("sonatypeReleaseAll", _)),
@@ -133,11 +129,3 @@ lazy val warnUnusedImport = Seq(
 def macroParadise(v: String): Seq[ModuleID] =
   if (v.startsWith("2.10")) Seq(compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full))
   else Seq.empty
-
-val publishDoc = taskKey[Unit]("Publish API documentation for all artifacts")
-
-publishDoc := {
-  IO.copyDirectory((doc in (valuesJVM, Compile)).value, Path.userHome / "sites" / "julienrf.github.com" / "enum-values" / version.value / "api")
-  IO.copyDirectory((doc in (labelsJVM, Compile)).value, Path.userHome / "sites" / "julienrf.github.com" / "enum-labels" / version.value / "api")
-  IO.copyDirectory((doc in (enumJVM, Compile)).value, Path.userHome / "sites" / "julienrf.github.com" / "enum" / version.value / "api")
-}

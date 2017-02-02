@@ -41,7 +41,7 @@ enum.decode("invalid") == Left(DecodingFailure[Foo](Set("Bar", "Baz")))
 enum.decodeOpt("Baz") == Some(Foo.Baz)
 ~~~
 
-See the [API documentation](https://www.javadoc.io/doc/org.julienrf/enum_2.11/3.0) for more details.
+See the [API documentation](https://www.javadoc.io/doc/org.julienrf/enum_2.12/3.1) for more details.
 
 ### `enum-values`
 
@@ -55,7 +55,7 @@ val fooValues: Values[Foo] = Values.derived[Foo]
 fooValues.values == Set(Foo.Bar, Foo.Baz)
 ~~~
 
-See the [API documentation](https://www.javadoc.io/doc/org.julienrf/enum-values_2.11/3.0) for more details.
+See the [API documentation](https://www.javadoc.io/doc/org.julienrf/enum-values_2.12/3.1) for more details.
 
 ### `enum-labels`
 
@@ -69,10 +69,12 @@ val fooLabels: Labels[Foo] = Labels.derived[Foo]
 fooLabels.labels == Set("Bar", "Baz")
 ~~~
 
-See the [API documentation](https://www.javadoc.io/doc/org.julienrf/enum-labels_2.11/3.0) for more details.
+See the [API documentation](https://www.javadoc.io/doc/org.julienrf/enum-labels_2.12/3.1) for more details.
 
 ## Changelog
 
+- 3.1
+    - Scala 2.12 support
 - 3.0
     - **Breaking change**: the companion object’s `apply` method that was used to derive enumerations
       has been renamed to `derived`. The `apply` method still exists but it now returns the
