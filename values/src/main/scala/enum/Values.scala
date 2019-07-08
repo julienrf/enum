@@ -59,7 +59,7 @@ object Values {
       */
     implicit def generic[A, Repr <: Coproduct](implicit gen: Generic.Aux[A, Repr], v: ValuesAux[A, Repr]): Derived[A] =
       new Derived[A] {
-        val values = v.values.to[Set]
+        val values = v.values.toSet
       }
 
      /*
