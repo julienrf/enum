@@ -1,28 +1,36 @@
+import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
+
 name := "enums"
 
 organization in ThisBuild := "org.julienrf"
 
-scalaVersion in ThisBuild := "2.12.0"
+scalaVersion in ThisBuild := "2.13.0"
 
-crossScalaVersions := Seq("2.10.6", "2.11.8", scalaVersion.value)
+crossScalaVersions := Seq("2.10.6", "2.11.12", "2.12.8", scalaVersion.value)
 
-scalacOptions in ThisBuild ++= Seq(
-  "-deprecation",
-  "-encoding", "UTF-8",
-  "-feature",
-  "-unchecked",
-  "-Yno-adapted-args",
-  "-Ywarn-dead-code",
-  "-Ywarn-numeric-widen",
-  "-Ywarn-value-discard",
-  "-Xlint",
-  "-Xfuture"
-)
+scalacOptions in ThisBuild ++= {
+  val oldOptions = CrossVersion.partialVersion(scalaVersion.value) match {
+    case Some((2, n)) if n < 13 =>
+      Seq("-Yno-adapted-args", "-Xfuture")
+    case Some((2, _)) => Seq()
+  }
+
+  Seq(
+    "-deprecation",
+    "-encoding", "UTF-8",
+    "-feature",
+    "-unchecked",
+    "-Ywarn-dead-code",
+    "-Ywarn-numeric-widen",
+    "-Ywarn-value-discard",
+    "-Xlint"
+  ) ++ oldOptions
+}
 
 lazy val shapelessAndTestDeps = Def.setting(Seq(
-  "com.chuusai" %%% "shapeless" % "2.3.2",
-  "org.scalacheck" %%% "scalacheck" % "1.13.4" % Test,
-  "org.scalatest" %%% "scalatest" % "3.0.1" % Test
+  "com.chuusai" %%% "shapeless" % "2.3.3",
+  "org.scalacheck" %%% "scalacheck" % "1.14.0" % Test,
+  "org.scalatest" %%% "scalatest" % "3.0.8" % Test
 ))
 
 lazy val commonSettings = Seq(
@@ -60,7 +68,8 @@ val publishSettings = Seq(
 )
 
 val values =
-  crossProject.crossType(CrossType.Pure)
+  crossProject(JSPlatform, JVMPlatform)
+    .crossType(CrossType.Pure)
     .in(file("values"))
     .settings(commonSettings ++ publishSettings: _*)
     .settings(
@@ -71,7 +80,8 @@ val valuesJS = values.js
 val valuesJVM = values.jvm
 
 val labels =
-  crossProject.crossType(CrossType.Pure)
+  crossProject(JSPlatform, JVMPlatform)
+    .crossType(CrossType.Pure)
     .in(file("labels"))
     .settings(commonSettings ++ publishSettings: _*)
     .settings(
@@ -82,7 +92,8 @@ val labelsJS = labels.js
 val labelsJVM = labels.jvm
 
 val enum =
-  crossProject.crossType(CrossType.Pure)
+  crossProject(JSPlatform, JVMPlatform)
+    .crossType(CrossType.Pure)
     .in(file("enum"))
     .settings(commonSettings ++ publishSettings: _*)
     .settings(
@@ -118,11 +129,13 @@ lazy val warnUnusedImport = Seq(
   scalacOptions ++= {
     CrossVersion.partialVersion(scalaVersion.value) match {
       case Some((2, 10)) => Seq()
+      case Some((2, n)) if n >= 13 => Seq("-Ywarn-unused:imports")
       case Some((2, n)) if n >= 11 => Seq("-Ywarn-unused-import")
-
     }
   },
-  scalacOptions in (Compile, console) ~= {_.filterNot("-Ywarn-unused-import" == _)},
+  scalacOptions in (Compile, console) ~= {
+    _.filterNot(value => value == "-Ywarn-unused-import" || value == "-Ywarn-unused:imports")
+  },
   scalacOptions in (Test, console) <<= (scalacOptions in (Compile, console))
 )
 
