@@ -8,7 +8,7 @@ Yet another enumeration toolbox for Scala, powered by [shapeless](https://github
  - [![](https://index.scala-lang.org/julienrf/enum/enum-values/latest.svg)](https://index.scala-lang.org/julienrf/enum/enum-values) finds the set of values of an enumeration ;
  - [![](https://index.scala-lang.org/julienrf/enum/enum-labels/latest.svg)](https://index.scala-lang.org/julienrf/enum/enum-labels) finds the set of value names of an enumeration ;
 
-The artifacts are built for Scala 2.10, 2.11, 2.12 and Scala.js 0.6.
+The artifacts are built for Scala 2.10, 2.11, 2.12, 2.13 and Scala.js 0.6.
 
 ## Usage
 
@@ -41,7 +41,7 @@ enum.decode("invalid") == Left(DecodingFailure[Foo](Set("Bar", "Baz")))
 enum.decodeOpt("Baz") == Some(Foo.Baz)
 ~~~
 
-See the [API documentation](https://www.javadoc.io/doc/org.julienrf/enum_2.12/3.1) for more details.
+See the [API documentation](https://www.javadoc.io/doc/org.julienrf/enum_2.13/3.1) for more details.
 
 ### `enum-values`
 
@@ -55,7 +55,7 @@ val fooValues: Values[Foo] = Values.derived[Foo]
 fooValues.values == Set(Foo.Bar, Foo.Baz)
 ~~~
 
-See the [API documentation](https://www.javadoc.io/doc/org.julienrf/enum-values_2.12/3.1) for more details.
+See the [API documentation](https://www.javadoc.io/doc/org.julienrf/enum-values_2.13/3.1) for more details.
 
 ### `enum-labels`
 
@@ -69,12 +69,12 @@ val fooLabels: Labels[Foo] = Labels.derived[Foo]
 fooLabels.labels == Set("Bar", "Baz")
 ~~~
 
-See the [API documentation](https://www.javadoc.io/doc/org.julienrf/enum-labels_2.12/3.1) for more details.
+See the [API documentation](https://www.javadoc.io/doc/org.julienrf/enum-labels_2.13/3.1) for more details.
 
 ## Changelog
 
 - 3.1
-    - Scala 2.12 support
+    - Scala 2.12 and 2.13 support
 - 3.0
     - **Breaking change**: the companion object’s `apply` method that was used to derive enumerations
       has been renamed to `derived`. The `apply` method still exists but it now returns the
