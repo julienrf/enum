@@ -136,7 +136,7 @@ lazy val warnUnusedImport = Seq(
   scalacOptions in (Compile, console) ~= {
     _.filterNot(value => value == "-Ywarn-unused-import" || value == "-Ywarn-unused:imports")
   },
-  scalacOptions in (Test, console) <<= (scalacOptions in (Compile, console))
+  scalacOptions in (Test, console) := (scalacOptions in (Compile, console)).value
 )
 
 def macroParadise(v: String): Seq[ModuleID] =
