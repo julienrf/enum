@@ -29,8 +29,8 @@ scalacOptions in ThisBuild ++= {
 
 lazy val shapelessAndTestDeps = Def.setting(Seq(
   "com.chuusai" %%% "shapeless" % "2.3.3",
-  "org.scalacheck" %%% "scalacheck" % "1.14.0" % Test,
-  "org.scalatest" %%% "scalatest" % "3.0.8" % Test
+  "org.scalacheck" %%% "scalacheck" % "1.14.3" % Test,
+  "org.scalatest" %%% "scalatest" % "3.1.1" % Test
 ))
 
 lazy val commonSettings = Seq(
