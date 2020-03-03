@@ -4,7 +4,7 @@ name := "enums"
 
 organization in ThisBuild := "org.julienrf"
 
-scalaVersion in ThisBuild := "2.13.0"
+scalaVersion in ThisBuild := "2.13.1"
 
 crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.8", scalaVersion.value)
 
