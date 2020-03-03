@@ -4,7 +4,7 @@ import org.scalatest.funsuite.AnyFunSuite
 
 class EnumSuite extends AnyFunSuite {
   test("Enum[Foo]") {
-    val enum = Enum[Foo]
+    val enum = Foo.enum
     assert(enum.values == Set(Foo.Bar, Foo.Baz))
     assert(enum.labels == Set("Bar", "Baz"))
     assert(enum.encode(Foo.Bar) == "Bar")
