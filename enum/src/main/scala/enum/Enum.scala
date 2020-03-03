@@ -1,5 +1,7 @@
 package enum
 
+import shapeless.Lazy
+
 /**
   * {{{
   *   sealed trait Foo

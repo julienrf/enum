@@ -3,10 +3,8 @@ package enum
 import org.scalatest.FunSuite
 
 class EnumSuite extends FunSuite {
-  import EnumSuite.{Foo, TwoLevels}
-
   test("Enum[Foo]") {
-    val enum = Enum[Foo]
+    val enum = Foo.enum
     assert(enum.values == Set(Foo.Bar, Foo.Baz))
     assert(enum.labels == Set("Bar", "Baz"))
     assert(enum.encode(Foo.Bar) == "Bar")
@@ -19,22 +17,4 @@ class EnumSuite extends FunSuite {
   test("Enum[TwoLevels]") {
     assert(Enum[TwoLevels].labels == Set("FirstValue", "SecondValue", "ThirdValue"))
   }
-
-}
-
-object EnumSuite {
-  sealed trait Foo
-  object Foo {
-    case object Bar extends Foo
-    case object Baz extends Foo
-
-    implicit val enum: Enum[Foo] = Enum.derived
-  }
-
-  sealed trait TwoLevels
-  case object FirstValue extends TwoLevels
-  sealed trait SecondLevel extends TwoLevels
-  case object SecondValue extends SecondLevel
-  case object ThirdValue extends SecondLevel
-  implicit val twoLevelsEnum: Enum[TwoLevels] = Enum.derived
 }

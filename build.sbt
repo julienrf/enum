@@ -6,7 +6,7 @@ organization in ThisBuild := "org.julienrf"
 
 scalaVersion in ThisBuild := "2.13.1"
 
-crossScalaVersions := Seq("2.11.12", "2.12.10", scalaVersion.value)
+crossScalaVersions in ThisBuild := Seq("2.11.12", "2.12.10", scalaVersion.value)
 
 scalacOptions in ThisBuild ++= {
   val oldOptions = CrossVersion.partialVersion(scalaVersion.value) match {
