@@ -1,8 +1,8 @@
 package enum
 
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
 
-class LabelsSuite extends FunSuite {
+class LabelsSuite extends AnyFunSuite {
   test("Labels[Foo]") {
     assert(Labels[Foo].labels == Set("Bar", "Baz"))
   }

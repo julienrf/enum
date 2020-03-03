@@ -1,6 +1,6 @@
 package enum
 
-import shapeless.{:+:, CNil, Coproduct, Generic, Witness}
+import shapeless.{:+:, Witness, CNil, Generic, Coproduct}
 
 import scala.annotation.implicitNotFound
 
