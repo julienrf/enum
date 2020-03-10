@@ -8,7 +8,7 @@ Yet another enumeration toolbox for Scala, powered by [shapeless](https://github
  - [![](https://index.scala-lang.org/julienrf/enum/enum-values/latest.svg)](https://index.scala-lang.org/julienrf/enum/enum-values) finds the set of values of an enumeration ;
  - [![](https://index.scala-lang.org/julienrf/enum/enum-labels/latest.svg)](https://index.scala-lang.org/julienrf/enum/enum-labels) finds the set of value names of an enumeration ;
 
-The artifacts are built for Scala 2.10, 2.11, 2.12, 2.13 and Scala.js 0.6.
+The artifacts are built for Scala 2.11, 2.12, 2.13 and Scala.js 0.6.
 
 ## Usage
 
