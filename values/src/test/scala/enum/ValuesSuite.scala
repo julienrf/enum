@@ -1,22 +1,9 @@
 package enum
 
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
 
-class ValuesSuite extends FunSuite {
-  import ValuesSuite.Foo
-
+class ValuesSuite extends AnyFunSuite {
   test("Values[Foo]") {
     assert(Values[Foo].values == Set(Foo.Bar, Foo.Baz))
-  }
-
-}
-
-object ValuesSuite {
-  sealed trait Foo
-  object Foo {
-    case object Bar extends Foo
-    case object Baz extends Foo
-
-    implicit val enum: Values[Foo] = Values.derived
   }
 }

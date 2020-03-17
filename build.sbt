@@ -4,9 +4,9 @@ name := "enums"
 
 organization in ThisBuild := "org.julienrf"
 
-scalaVersion in ThisBuild := "2.13.0"
+scalaVersion in ThisBuild := "2.13.1"
 
-crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.8", scalaVersion.value)
+crossScalaVersions in ThisBuild := Seq("2.11.12", "2.12.10", scalaVersion.value)
 
 scalacOptions in ThisBuild ++= {
   val oldOptions = CrossVersion.partialVersion(scalaVersion.value) match {
@@ -29,8 +29,8 @@ scalacOptions in ThisBuild ++= {
 
 lazy val shapelessAndTestDeps = Def.setting(Seq(
   "com.chuusai" %%% "shapeless" % "2.3.3",
-  "org.scalacheck" %%% "scalacheck" % "1.14.0" % Test,
-  "org.scalatest" %%% "scalatest" % "3.0.8" % Test
+  "org.scalacheck" %%% "scalacheck" % "1.14.3" % Test,
+  "org.scalatest" %%% "scalatest" % "3.1.1" % Test
 ))
 
 lazy val commonSettings = Seq(
@@ -136,7 +136,7 @@ lazy val warnUnusedImport = Seq(
   scalacOptions in (Compile, console) ~= {
     _.filterNot(value => value == "-Ywarn-unused-import" || value == "-Ywarn-unused:imports")
   },
-  scalacOptions in (Test, console) <<= (scalacOptions in (Compile, console))
+  scalacOptions in (Test, console) := (scalacOptions in (Compile, console)).value
 )
 
 def macroParadise(v: String): Seq[ModuleID] =
